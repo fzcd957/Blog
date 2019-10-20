@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../static/css/typo.css">
     <link rel="stylesheet" href="../static/css/animate.css">
     <link rel="stylesheet" href="../static/lib/prism/prism.css">
+    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css">
     <link rel="stylesheet" href="../static/css/me.css">
 </head>
 
@@ -70,7 +71,7 @@
 
             <h2 class="ui center aligned header">关于刻意练习的清单</h2>
             <br>
-            <div id="content" class="typo typo-selection m-padding-lr-responsive m-padding-tb-large">
+            <div id="content" class="js-toc-content typo typo-selection m-padding-lr-responsive m-padding-tb-large">
 
                 <pre><code class="language-css">p {color: red;}</code></pre>
 
@@ -510,7 +511,7 @@ h5,h6{font-size:1em;}
         </div>
 
         <!-- 留言区域 -->
-        <div class="ui bottom attached segment">
+        <div id="comment-container" class="ui bottom attached segment">
             <!-- 留言区域列表 -->
             <div class="ui teal segment">
                 <div class="ui comments">
@@ -608,6 +609,21 @@ h5,h6{font-size:1em;}
     </div>
 </div>
 
+<div class="m-padding m-fixed m-bottom-right">
+    <div class="ui vertical icon buttons">
+        <button type="button" class="ui toc teal button">目录</button>
+        <a href="#comment-container" class="ui teal button">留言</a>
+        <button type="button" class="ui icon button"><i class="wechat icon"></i></button>
+        <a href="#" class="ui button"><i class="chevron up icon"></i></a>
+    </div>
+</div>
+
+<div class="ui toc-container flowing popup transition hidden" style="width: 250px">
+    <ol class="js-toc">
+
+    </ol>
+</div>
+
 <br><br>
 <!-- 底部 -->
 <footer class="ui inverted vertical segment m-padding-tb-massive">
@@ -650,6 +666,7 @@ h5,h6{font-size:1em;}
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <script src="../static/lib/prism/prism.js"></script>
+<script src="../static/lib/tocbot/tocbot.min.js"></script>
 
 <script>
     $('.menu.toggle').click(function () {
@@ -660,7 +677,18 @@ h5,h6{font-size:1em;}
         popup: $('.payQR.popup'),
         on: 'click',
         position: 'bottom center'
-    })
+    });
+
+    tocbot.init({
+        tocSelector: '.js-toc',
+        contentSelector: '.js-toc-content',
+        headingSelector: 'h1, h2, h3'
+    });
+    $('.toc.button').popup({
+        popup: $('.toc-container.popup'),
+        on: 'click',
+        position: 'left center'
+    });
 </script>
 </body>
 
