@@ -18,11 +18,11 @@
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
             <h2 class="ui teal header item">后台管理</h2>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'"><i
+            <a href="#" th:href="@{/admin/blogs}" class="m-item item m-mobile-hide" th:classappend="${n == 1} ? 'active'"><i
                     class="home icon"></i>博客管理</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 2} ? 'active'"><i
+            <a href="#" th:href="@{/admin/types}" class="m-item item m-mobile-hide" th:classappend="${n == 2} ? 'active'"><i
                     class="idea icon"></i>分类管理</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'"><i
+            <a href="#" th:href="@{/admin/tags}" class="m-item item m-mobile-hide" th:classappend="${n == 3} ? 'active'"><i
                     class="tags icon"></i>标签管理</a>
             <div class="right m-item menu m-mobile-hide">
                 <div class="ui dropdown item">
