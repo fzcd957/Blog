@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<head>
+<head th:replace="_fragments :: head(~{::title})">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>博客详情页</title>
@@ -15,7 +15,7 @@
 
 <body>
 <!-- 导航 -->
-<nav class="ui inverted attached segment m-padding-tb-mini m-shadow-small">
+<nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padding-tb-mini m-shadow-small">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
             <h2 class="ui teal header item">Blog</h2>
@@ -628,7 +628,7 @@ h5,h6{font-size:1em;}
 
 <br><br>
 <!-- 底部 -->
-<footer class="ui inverted vertical segment m-padding-tb-massive">
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padding-tb-massive">
     <div class="ui center aligned container">
         <div class="ui inverted  stackable grid">
             <div class="three wide column">
@@ -665,6 +665,7 @@ h5,h6{font-size:1em;}
     </div>
 </footer>
 
+<!--/*/<th:block th:fragment="_fragments :: script">/*/-->
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
@@ -673,6 +674,7 @@ h5,h6{font-size:1em;}
 <script src="../static/lib/tocbot/tocbot.min.js"></script>
 <script src="../static/lib/qrcode/qrcode.min.js"></script>
 <script src="../static/lib/waypoints/jquery.waypoints.min.js"></script>
+<!--/*/</th:block>/*/-->
 
 <script>
     $('.menu.toggle').click(function () {
