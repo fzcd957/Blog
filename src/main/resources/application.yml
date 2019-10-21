@@ -7,3 +7,7 @@ spring:
     encoding: UTF-8
   profiles:
     active: dev
+
+admin:
+  username: hanxiaofeng
+  password: 7da1eb35934199fcb2920444f711d21f
