@@ -8,4 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface TypeRepository extends CrudRepository<Type, Long> {
 
     Page<Type> findAll(Pageable pageable);
+
+    Type findByName(String name);
 }

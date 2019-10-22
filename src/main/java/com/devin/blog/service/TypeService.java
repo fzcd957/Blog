@@ -23,6 +23,14 @@ public interface TypeService {
     Type getType(Long id);
 
     /**
+     * 根据名称查询分类
+     *
+     * @param name 分类名称
+     * @return 指定分类
+     */
+    Type getTypeByName(String name);
+
+    /**
      * 分页查询
      *
      * @param pageable 分页对象
@@ -41,6 +49,7 @@ public interface TypeService {
 
     /**
      * 删除分类
+     *
      * @param id 分类 id
      */
     void deleteType(Long id);

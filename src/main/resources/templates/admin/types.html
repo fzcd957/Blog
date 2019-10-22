@@ -40,8 +40,8 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class="item">新增</a>
-            <a href="#" class="active teal item">列表</a>
+            <a href="#" th:href="@{/admin/types/input}" class="item">新增</a>
+            <a href="#" th:href="@{/admin/types}" class="active teal item">列表</a>
         </div>
     </div>
 </div>
@@ -50,21 +50,29 @@
 <div class="m-padding-tb-big m-container-small">
     <div class="ui container">
 
+        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <i class="close icon"></i>
+            <div class="header">提示：</div>
+            <p th:text="${message}">恭喜：操作成功</p>
+        </div>
+
         <table class="ui celled table">
             <thead>
-            <tr>
+            <tr class="center aligned">
                 <th>#</th>
                 <th>名称</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="type,iterStat : ${page.content}">
+            <tr th:each="type,iterStat : ${page.content}" class="center aligned">
                 <td th:text="${iterStat.count}">1</td>
                 <td th:text="${type.name}">认知升级</td>
                 <td>
-                    <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini basic teal button">编辑</a>
-                    <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini basic red button">删除</a>
+                    <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}"
+                       class="ui mini basic teal button">编辑</a>
+                    <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}"
+                       class="ui mini basic red button">删除</a>
                 </td>
             </tr>
 
@@ -73,8 +81,10 @@
             <tr>
                 <th colspan="6">
                     <div class="ui mini pagination menu" th:if="${page.totalPages > 1}">
-                        <a href="#" th:href="@{/admin/types(page=${page.number-1})}" th:unless="${page.first}" class="item">上一页</a>
-                        <a href="#" th:href="@{/admin/types(page=${page.number+1})}" th:unless="${page.last}" class="item">下一页</a>
+                        <a href="#" th:href="@{/admin/types(page=${page.number-1})}" th:unless="${page.first}"
+                           class="item">上一页</a>
+                        <a href="#" th:href="@{/admin/types(page=${page.number+1})}" th:unless="${page.last}"
+                           class="item">下一页</a>
                     </div>
                     <a class="ui right floated mini teal basic button" th:href="@{/admin/types/input}">新增分类</a>
                 </th>
@@ -135,6 +145,12 @@
     });
 
     $('.ui.dropdown').dropdown();
+
+    $('.message .close').on('click', function () {
+        $(this)
+            .closest('.message')
+            .transition('fade');
+    })
 </script>
 </body>
 
