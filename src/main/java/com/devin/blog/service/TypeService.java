@@ -4,6 +4,8 @@ import com.devin.blog.po.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface TypeService {
 
     /**
@@ -53,4 +55,11 @@ public interface TypeService {
      * @param id 分类 id
      */
     void deleteType(Long id);
+
+    /**
+     * 获取所有的分类
+     *
+     * @return 所有分类列表
+     */
+    List<Type> listType();
 }
