@@ -9,10 +9,10 @@ public interface TagService {
     /**
      * 新增标签
      *
-     * @param Tag 标签
+     * @param tag 标签
      * @return 添加后的标签
      */
-    Tag saveTag(Tag Tag);
+    Tag saveTag(Tag tag);
 
     /**
      * 根据 id 查询标签
@@ -21,6 +21,14 @@ public interface TagService {
      * @return 指定标签
      */
     Tag getTag(Long id);
+
+    /**
+     * 根据名称查询标签
+     *
+     * @param name 标签名称
+     * @return 指定标签
+     */
+    Tag getTagByName(String name);
 
     /**
      * 分页查询
@@ -33,11 +41,11 @@ public interface TagService {
     /**
      * 更新标签信息
      *
-     * @param id  标签 id
-     * @param Tag 更新后的标签
+     * @param id   标签 id
+     * @param tag 更新后的标签
      * @return 更新后的标签
      */
-    Tag updateTag(Long id, Tag Tag);
+    Tag updateTag(Long id, Tag tag);
 
     /**
      * 删除标签
@@ -46,4 +54,3 @@ public interface TagService {
      */
     void deleteTag(Long id);
 }
-

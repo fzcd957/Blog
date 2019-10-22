@@ -19,8 +19,8 @@ public class TagServiceImpl implements TagService {
 
     @Transactional
     @Override
-    public Tag saveTag(Tag Tag) {
-        return tagRepository.save(Tag);
+    public Tag saveTag(Tag tag) {
+        return tagRepository.save(tag);
     }
 
     @Transactional
@@ -31,18 +31,24 @@ public class TagServiceImpl implements TagService {
 
     @Transactional
     @Override
+    public Tag getTagByName(String name) {
+        return tagRepository.findByName(name);
+    }
+
+    @Transactional
+    @Override
     public Page<Tag> listTag(Pageable pageable) {
         return tagRepository.findAll(pageable);
     }
 
     @Transactional
     @Override
-    public Tag updateTag(Long id, Tag Tag) {
+    public Tag updateTag(Long id, Tag tag) {
         Tag t = tagRepository.findById(id).get();
         if (t == null) {
-            throw new NotFoundException("不存在该标签");
+            throw new NotFoundException("不存在该类型");
         }
-        BeanUtils.copyProperties(Tag, t);
+        BeanUtils.copyProperties(tag, t);
         return tagRepository.save(t);
     }
 
