@@ -21,6 +21,8 @@ public class Blog {
     /**
      * 博客内容
      */
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
     private String content;
 
     /**
@@ -62,6 +64,9 @@ public class Blog {
      * 是否推荐
      */
     private boolean recommend;
+
+    @Transient
+    private String tagIds;
 
     /**
      * 创建时间
@@ -213,6 +218,14 @@ public class Blog {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(String tagIds) {
+        this.tagIds = tagIds;
     }
 
     @Override

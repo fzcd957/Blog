@@ -83,10 +83,7 @@
                             <i class="dropdown icon"></i>
                             <div class="default text">分类</div>
                             <div class="menu">
-                                <div th:each="type : ${types}" th:data-value="${type.id}"
-                                     th:text="${type.name}" class="item" data-value="1">错误日志
-                                </div>
-                                <div class="item" data-value="2">开发者手册</div>
+                                <div th:each="type : ${types}" th:data-value="${type.id}" th:text="${type.name}" class="item" data-value="1">错误日志</div>
                             </div>
                         </div>
                     </div>
@@ -99,10 +96,7 @@
                             <i class="dropdown icon"></i>
                             <div class="default text">标签</div>
                             <div class="menu">
-                                <div th:each="tag : ${tags}" class="item" th:data-value="${tag.id}"
-                                     th:text="${tag.name}" data-value="1">Java开发
-                                </div>
-                                <div class="item" data-value="2">SpringBoot</div>
+                                <div th:each="tag : ${tags}" class="item" th:data-value="${tag.id}" th:text="${tag.name}" data-value="1">Java开发</div>
                             </div>
                         </div>
                     </div>

@@ -62,4 +62,6 @@ public interface TagService {
      * @return 标签
      */
     List<Tag> listTag();
+
+    List<Tag> listTag(String ids);
 }
