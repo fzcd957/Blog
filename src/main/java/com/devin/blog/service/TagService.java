@@ -4,6 +4,8 @@ import com.devin.blog.po.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface TagService {
 
     /**
@@ -41,7 +43,7 @@ public interface TagService {
     /**
      * 更新标签信息
      *
-     * @param id   标签 id
+     * @param id  标签 id
      * @param tag 更新后的标签
      * @return 更新后的标签
      */
@@ -53,4 +55,11 @@ public interface TagService {
      * @param id 标签 id
      */
     void deleteTag(Long id);
+
+    /**
+     * 获取所有标签
+     *
+     * @return 标签
+     */
+    List<Tag> listTag();
 }
