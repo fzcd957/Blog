@@ -27,11 +27,20 @@ public class BlogQuery {
         this.typeId = typeId;
     }
 
-    public Boolean isRecommend() {
+    public boolean isRecommend() {
         return recommend;
     }
 
     public void setRecommend(Boolean recommend) {
         this.recommend = recommend;
+    }
+
+    @Override
+    public String toString() {
+        return "BlogQuery{" +
+                "title='" + title + '\'' +
+                ", typeId=" + typeId +
+                ", recommend=" + recommend +
+                '}';
     }
 }

@@ -40,8 +40,8 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class="item">发布</a>
-            <a href="#" class="active teal item">列表</a>
+            <a href="#" class="item" th:href="@{/admin/blogs/input}">发布</a>
+            <a href="#" class="active teal item" th:href="@{/admin/blogs}">列表</a>
         </div>
     </div>
 </div>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <button type="button" id="search-btn" class="ui mini teal basic button"><i class="search icon"></i>搜索
+                    <button type="button" id="search-btn" class="ui teal basic button"><i class="search icon"></i>搜索
                     </button>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                 <tr class="center aligned">
                     <th>#</th>
                     <th>标题</th>
-                    <th>类型</th>
+                    <th>分类</th>
                     <th>推荐</th>
                     <th>状态</th>
                     <th>更新时间</th>
@@ -100,7 +100,7 @@
                     <td th:text="${blog.title}">刻意学习清单</td>
                     <td th:text="${blog.type.name}">认知升级</td>
                     <td th:text="${blog.recommend} ? '是' : '否'">是</td>
-                    <td th:text="${blog.published} ? '草稿' : '发布'">是</td>
+                    <td th:text="${blog.published} ? '发布' : '草稿'">是</td>
                     <td th:text="${blog.updateTime}">2019-10-20 09:45:34</td>
                     <td>
                         <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}"
@@ -210,7 +210,7 @@
         $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search", {
             title: $("[name='title']").val(),
             typeId: $("[name='typeId']").val(),
-            recomment: $("[name='recommend']").prop('checked'),
+            recommend: $("[name='recommend']").prop('checked'),
             page: $("[name='page']").val()
         })
     }

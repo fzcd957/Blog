@@ -12,6 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,13 +38,14 @@ public class BlogController {
     @GetMapping("/blogs")
     public String blogs(@PageableDefault(size = 7, sort = {"updateTime"}, direction = Sort.Direction.DESC)
                                 Pageable pageable, BlogQuery blog, Model model) {
+        System.out.println(blog);
         model.addAttribute("page", blogService.listBlog(pageable, blog));
         model.addAttribute("types", typeService.listType());
         return LIST;
     }
 
     @PostMapping("/blogs/search")
-    public String search(@PageableDefault(size = 2, sort = {"updateTime"}, direction = Sort.Direction.DESC)
+    public String search(@PageableDefault(size = 7, sort = {"updateTime"}, direction = Sort.Direction.DESC)
                                  Pageable pageable, BlogQuery blog, Model model) {
         model.addAttribute("page", blogService.listBlog(pageable, blog));
         return "admin/blogs :: blogList";
@@ -52,8 +54,16 @@ public class BlogController {
     @GetMapping("/blogs/input")
     public String input(Model model) {
         model.addAttribute("blog", new Blog());
-        model.addAttribute("types", typeService.listType());
-        model.addAttribute("tags", tagService.listTag());
+        setTypeAddTag(model);
+        return INPUT;
+    }
+
+    @GetMapping("/blogs/{id}/input")
+    public String editInput(@PathVariable Long id, Model model) {
+        setTypeAddTag(model);
+        Blog b = blogService.getBlog(id);
+        b.init();
+        model.addAttribute("blog", b);
         return INPUT;
     }
 
@@ -68,5 +78,17 @@ public class BlogController {
             attributes.addFlashAttribute("message", "操作成功");
         }
         return REDIRECT_LIST;
+    }
+
+    @GetMapping("/blogs/{id}/delete")
+    public String delete(@PathVariable Long id, RedirectAttributes attributes) {
+        blogService.deleteBlog(id);
+        attributes.addFlashAttribute("message", "删除成功");
+        return REDIRECT_LIST;
+    }
+
+    private void setTypeAddTag(Model model) {
+        model.addAttribute("types", typeService.listType());
+        model.addAttribute("tags", tagService.listTag());
     }
 }
