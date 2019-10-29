@@ -68,6 +68,8 @@ public class Blog {
     @Transient
     private String tagIds;
 
+    private String description;
+
     /**
      * 创建时间
      */
@@ -228,6 +230,14 @@ public class Blog {
         this.tagIds = tagIds;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void init() {
         this.tagIds = tagsToIds(this.tags);
     }
@@ -264,6 +274,8 @@ public class Blog {
                 ", commentable=" + commentable +
                 ", published=" + published +
                 ", recommend=" + recommend +
+                ", tagIds='" + tagIds + '\'' +
+                ", description='" + description + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';

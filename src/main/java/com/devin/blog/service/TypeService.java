@@ -62,4 +62,6 @@ public interface TypeService {
      * @return 所有分类列表
      */
     List<Type> listType();
+
+    List<Type> listTop(Integer size);
 }
