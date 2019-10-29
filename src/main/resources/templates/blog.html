@@ -48,7 +48,7 @@
                     <div class="content"><a href="#" class="header ">韩晓峰</a></div>
                 </div>
                 <div class="item">
-                    <i class="calendar icon"></i> <span th:text="${blog.updateTime}">2019-10-19</span>
+                    <i class="calendar icon"></i> <span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">2019-10-19</span>
                 </div>
                 <div class="item">
                     <i class="eye icon"></i> <span th:text="${blog.views}">2323</span>
@@ -58,7 +58,8 @@
 
         <!-- 图片区域 -->
         <div class="ui attached segment">
-            <img th:src="@{${blog.firstPicture}}" class="ui fluid image rounded" alt="" src="https://picsum.photos/id/1/800/450">
+            <img th:src="@{${blog.firstPicture}}" class="ui fluid image rounded" alt=""
+                 src="https://picsum.photos/id/1/800/450">
         </div>
 
         <!-- 正文 -->
@@ -71,7 +72,9 @@
 
             <h2 class="ui center aligned header" th:text="${blog.title}">关于刻意练习的清单</h2>
             <br>
-            <div id="content" class="js-toc-content typo typo-selection m-padding-lr-responsive m-padding-tb-large">
+
+            <div id="content" class="js-toc-content typo typo-selection m-padding-lr-responsive m-padding-tb-large"
+                 th:utext="${blog.content}">
                 <h2 id="section1">一、关于 <i class="serif">Typo.css</i></h2>
 
                 <pre><code class="language-css">p { color: red }</code></pre>
@@ -462,11 +465,12 @@ h5,h6{font-size:1em;}
                 <h5 id="appendix2">2、开源许可</h5>
             </div>
 
-
             <!-- 标签 -->
-            <div class="m-padding-lr m-padding-tb-large">
-                <div class="ui basic teal left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">方法论</div>
+            <div class="m-padding-lr-responsive">
+                <div class="ui basic teal left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">方法论
+                </div>
             </div>
+
             <!-- 赞赏 -->
             <div class="ui center aligned basic segment">
                 <button id="payButton" class="ui orange basic circular button">赞 赏</button>
@@ -475,12 +479,14 @@ h5,h6{font-size:1em;}
                 <div class="ui orange basic label">
                     <div class="ui images" style="font-size: inherit !important;">
                         <div class="image">
-                            <img class="ui rounded bordered image" alt="" src="../static/images/wechat.jpg"
+                            <img class="ui rounded bordered image" alt="" th:src="@{/images/wechat.jpg}"
+                                 src="../static/images/wechat.jpg"
                                  style="width: 120px;">
                             <div>支付宝支付</div>
                         </div>
                         <div class="image">
-                            <img class="ui rounded bordered image" alt="" src="../static/images/wechat.jpg"
+                            <img class="ui rounded bordered image" alt="" th:src="@{/images/wechat.jpg}"
+                                 src="../static/images/wechat.jpg"
                                  style="width: 120px;">
                             <div>微信支付</div>
                         </div>
@@ -494,14 +500,14 @@ h5,h6{font-size:1em;}
             <div class="ui middle aligned grid">
                 <div class="eleven wide column">
                     <ui class="list">
-                        <li>作者: 韩晓峰 (联系作者)</li>
-                        <li>发表时间: 2019-10-18 12:00:53</li>
+                        <li>作者: 韩晓峰 <a href="#" th:href="@{/about}"> (联系作者) </a></li>
+                        <li>发表时间: <span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd HH:mm')}">2019-10-18 12:00:53</span></li>
                         <li>版权声明: 自由转载-非商用-非衍生-保持署名</li>
                         <li>公众号转载: 请在文末添加作者公众号二维码</li>
                     </ui>
                 </div>
                 <div class="five wide column">
-                    <img class="ui right floated rounded bordered image" alt="" src="../static/images/wechat.jpg"
+                    <img class="ui right floated rounded bordered image" alt="" th:src="@{/images/wechat.jpg}" src="../static/images/wechat.jpg"
                          style="width: 100px !important;">
                 </div>
             </div>
@@ -673,7 +679,8 @@ h5,h6{font-size:1em;}
 <script src="../static/lib/waypoints/jquery.waypoints.min.js"></script>
 <!--/*/</th:block>/*/-->
 
-<script>
+<script th:inline="javascript">
+
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
     });
@@ -700,8 +707,10 @@ h5,h6{font-size:1em;}
         position: 'left center'
     });
 
+    var server = "http://127.0.0.1:8080";
+    var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
     var qrcode = new QRCode('qrcode', {
-        text: 'http://www.baidu.com',
+        text: server + url,
         width: 100,
         height: 100,
         colorDark: '#000000',

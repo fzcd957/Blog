@@ -1,4 +1,4 @@
-package com.devin.blog.uitl;
+package com.devin.blog.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

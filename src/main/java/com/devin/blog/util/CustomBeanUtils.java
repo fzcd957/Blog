@@ -1,4 +1,4 @@
-package com.devin.blog.uitl;
+package com.devin.blog.util;
 
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;

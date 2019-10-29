@@ -2,7 +2,7 @@ package com.devin.blog.service.impl;
 
 import com.devin.blog.config.UserProperties;
 import com.devin.blog.service.UserService;
-import com.devin.blog.uitl.MD5Utils;
+import com.devin.blog.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -5,7 +5,8 @@ import com.devin.blog.handler.NotFoundException;
 import com.devin.blog.po.Blog;
 import com.devin.blog.po.Type;
 import com.devin.blog.service.BlogService;
-import com.devin.blog.uitl.CustomBeanUtils;
+import com.devin.blog.util.CustomBeanUtils;
+import com.devin.blog.util.MarkdownUtils;
 import com.devin.blog.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,22 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog getBlog(Long id) {
-        return blogRepository.findById(id).get();
+        return blogRepository.getOne(id);
+    }
+
+    @Override
+    public Blog getAndConvert(Long id) {
+        Blog blog = blogRepository.getOne(id);
+        if (blog == null) {
+            throw new NotFoundException("博客不存在");
+        }
+
+        // 避免修改数据库内容
+        Blog b = new Blog();
+        BeanUtils.copyProperties(blog, b);
+        String content = b.getContent();
+        b.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+        return b;
     }
 
     @Override
@@ -85,7 +101,7 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     @Override
     public Blog updateBlog(Long id, Blog blog) {
-        Blog b = blogRepository.findById(id).get();
+        Blog b = blogRepository.getOne(id);
         if (b == null) {
             throw new NotFoundException("该博客不存在");
         }
