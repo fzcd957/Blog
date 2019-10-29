@@ -29,10 +29,12 @@
             <a href="#" class="m-item item m-mobile-hide" th:classappend="${n == 5} ? 'active'"><i
                     class="info icon"></i>关于我</a>
             <div class="right m-item item m-mobile-hide">
-                <div class="ui icon input">
-                    <input type="text" placeholder="Search....">
-                    <i class="search icon link"></i>
-                </div>
+                <form name="search" action="#" method="get" th:action="@{/search}" target="_blank">
+                    <div class="ui icon input m-margin-tb-tiny">
+                        <input type="text" name="query" placeholder="Search...." th:value="${query}">
+                        <i onclick="document.forms['search'].submit()" class="search icon link"></i>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
