@@ -11,13 +11,6 @@
     <link rel="stylesheet" href="../static/lib/prism/prism.css">
     <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css">
     <link rel="stylesheet" href="../static/css/me.css">
-
-    <style>
-        .typo li {
-            font-weight: 300;
-            padding: 0.5em 0;
-        }
-    </style>
 </head>
 
 <body>
@@ -52,14 +45,17 @@
             <div class="ui horizontal link list">
                 <div class="item">
                     <img class="ui avatar image" src="https://picsum.photos/id/1005/100/100">
-                    <div class="content"><a href="#" class="header ">韩晓峰</a></div>
+                    <div class="content"><a href="#" th:href="@{/about}" class="header ">韩晓峰</a></div>
                 </div>
                 <div class="item">
-                    <i class="calendar icon"></i> <span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">2019-10-19</span>
+                    <i class="calendar icon"></i> <span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd hh:mm')}">2019-10-19</span>
                 </div>
+                <!-- todo: 阅读量统计 -->
+                <!--
                 <div class="item">
                     <i class="eye icon"></i> <span th:text="${blog.views}">2323</span>
                 </div>
+                -->
             </div>
         </div>
 
@@ -479,27 +475,29 @@ h5,h6{font-size:1em;}
             </div>
 
             <!-- 赞赏 -->
-            <div class="ui center aligned basic segment">
-                <button id="payButton" class="ui orange basic circular button">赞 赏</button>
-            </div>
-            <div class="ui payQR flowing popup transition hidden">
-                <div class="ui orange basic label">
-                    <div class="ui images" style="font-size: inherit !important;">
-                        <div class="image">
-                            <img class="ui rounded bordered image" alt="" th:src="@{/images/wechat.jpg}"
-                                 src="../static/images/wechat.jpg"
-                                 style="width: 120px;">
-                            <div>支付宝支付</div>
-                        </div>
-                        <div class="image">
-                            <img class="ui rounded bordered image" alt="" th:src="@{/images/wechat.jpg}"
-                                 src="../static/images/wechat.jpg"
-                                 style="width: 120px;">
-                            <div>微信支付</div>
+            <th:block th:if="${blog.appreciation}">
+                <div class="ui center aligned basic segment">
+                    <button id="payButton" class="ui orange basic circular button">赞 赏</button>
+                </div>
+                <div class="ui payQR flowing popup transition hidden">
+                    <div class="ui orange basic label">
+                        <div class="ui images" style="font-size: inherit !important;">
+                            <div class="image">
+                                <img class="ui rounded bordered image" alt="" th:src="@{/images/wechat.jpg}"
+                                     src="../static/images/wechat.jpg"
+                                     style="width: 120px;">
+                                <div>支付宝支付</div>
+                            </div>
+                            <div class="image">
+                                <img class="ui rounded bordered image" alt="" th:src="@{/images/wechat.jpg}"
+                                     src="../static/images/wechat.jpg"
+                                     style="width: 120px;">
+                                <div>微信支付</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </th:block>
         </div>
 
         <!-- 博客信息 -->
@@ -520,9 +518,9 @@ h5,h6{font-size:1em;}
             </div>
         </div>
 
-        <!-- 留言区域 -->
+        <!-- todo: 留言区域 -->
+        <!--
         <div id="comment-container" class="ui bottom attached segment">
-            <!-- 留言区域列表 -->
             <div class="ui teal segment">
                 <div class="ui comments">
                     <h3 class="ui dividing header">Comments</h3>
@@ -592,7 +590,6 @@ h5,h6{font-size:1em;}
                     </div>
                 </div>
             </div>
-            <!-- 提交留言区域 -->
             <div class="ui form">
                 <div class="field">
                     <textarea name="content" placeholder="请输入评论信息..."></textarea>
@@ -616,13 +613,16 @@ h5,h6{font-size:1em;}
                 </div>
             </div>
         </div>
+        -->
     </div>
 </div>
 
 <div id="toolbar" class="m-padding m-fixed m-bottom-right" style="display: none;">
     <div class="ui vertical icon buttons">
         <button type="button" class="ui toc teal button">目录</button>
+        <!-- todo: 留言内容
         <a href="#comment-container" class="ui teal button">留言</a>
+        -->
         <button type="button" class="ui wechat icon button"><i class="wechat icon"></i></button>
         <div id="toTop-button" href="#" class="ui button"><i class="chevron up icon"></i></div>
     </div>
@@ -715,7 +715,7 @@ h5,h6{font-size:1em;}
     });
 
     var server = "http://127.0.0.1:8080";
-    var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
+    var url = /*[[@{/blogs/{id}(id=${blog.id})}]]*/"";
     var qrcode = new QRCode('qrcode', {
         text: server + url,
         width: 100,

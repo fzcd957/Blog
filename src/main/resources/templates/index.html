@@ -58,7 +58,7 @@
                         <div class="ui middle aligned mobile reversed stackable grid">
                             <div class="eleven wide column">
                                 <h3 class="ui header">
-                                    <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"
+                                    <a href="#" th:href="@{/blogs/{id}(id=${blog.id})}" target="_blank"
                                        th:text="${blog.title}" class="m-black">你真的理解什么是财富自由吗？</a>
                                 </h3>
                                 <p class="m-text" th:text="|${blog.description}......|">
@@ -70,14 +70,19 @@
                                             <div class="item">
                                                 <img class="ui avatar image"
                                                      src="https://picsum.photos/id/1005/100/100">
-                                                <div class="content"><a href="#" class="header ">韩晓峰</a></div>
+                                                <div class="content"><a href="#" th:href="@{/about}"
+                                                                        class="header ">韩晓峰</a></div>
                                             </div>
-                                            <div class="item" th:text="${blog.updateTime}">
-                                                <i class="calendar icon"></i> <span th:text="${blog.updateTime}">2019-10-19</span>
+                                            <div class="item">
+                                                <i class="calendar icon"></i> <span
+                                                    th:text="${#dates.format(blog.updateTime, 'yyy-MM-dd hh:mm')}">2019-10-19</span>
                                             </div>
+                                            <!-- todo: 添加阅读量功能 -->
+                                            <!--
                                             <div class="item">
                                                 <i class="eye icon"></i> <span th:text="${blog.views}">2323</span>
                                             </div>
+                                            -->
                                         </div>
                                     </div>
                                     <div class=" right aligned five wide column">
@@ -88,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="five wide column">
-                                <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                                <a href="#" th:href="@{/blogs/{id}(id=${blog.id})}" target="_blank">
                                     <img class="ui rounded image" src="https://picsum.photos/id/1/800/450"
                                          th:src="@{${blog.firstPicture}}">
                                 </a>
@@ -122,36 +127,20 @@
                                 <i class="idea icon"></i> 分类
                             </div>
                             <div class="right aligned column">
-                                <a href="#" target="_blank">more <i class="angle double right icon"></i></a>
+                                <a href="#" th:href="@{/types/-1}" target="_blank">more <i
+                                        class="angle double right icon"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="ui teal segment">
                         <div class="ui fluid vertical menu">
-                            <a href="#" class="item" th:each="type : ${types}">
+                            <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item"
+                               th:each="type : ${types}">
                                 <span th:text="${type.name}">学习日志</span>
                                 <div class="ui teal basic left pointing label" th:text="${#arrays.length(type.blogs)}">
                                     13
                                 </div>
                             </a>
-                            <!--/*-->
-                            <a href="#" class="item">
-                                思考与感悟
-                                <div class="ui teal basic left pointing label">13</div>
-                            </a>
-                            <a href="#" class="item">
-                                杂记
-                                <div class="ui teal basic left pointing label">13</div>
-                            </a>
-                            <a href="#" class="item">
-                                认知升级
-                                <div class="ui teal basic left pointing label">13</div>
-                            </a>
-                            <a href="#" class="item">
-                                编程
-                                <div class="ui teal basic left pointing label">13</div>
-                            </a>
-                            <!--*/-->
                         </div>
                     </div>
                 </div>
@@ -164,38 +153,18 @@
                                 <i class="tags icon"></i> 标签
                             </div>
                             <div class="right aligned column">
-                                <a href="#" target="_blank">more <i class="angle double right icon"></i></a>
+                                <a href="#" th:href="@{/tags/-1}" target="_blank">more <i
+                                        class="angle double right icon"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="ui teal segment">
-                        <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny"
+                        <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" target="_blank"
+                           class="ui teal basic left pointing label m-margin-tb-tiny"
                            th:each="tag : ${tags}">
                             <span th:text="${tag.name}">方法论</span>
                             <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>
                         </a>
-                        <!--/*-->
-                        <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny">
-                            Java
-                            <div class="detail">23</div>
-                        </a>
-                        <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny">
-                            数据结构
-                            <div class="detail">23</div>
-                        </a>
-                        <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny">
-                            算法
-                            <div class="detail">23</div>
-                        </a>
-                        <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny">
-                            计算机组成与原理
-                            <div class="detail">23</div>
-                        </a>
-                        <a href="#" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny">
-                            测试
-                            <div class="detail">23</div>
-                        </a>
-                        <!--*/-->
                     </div>
                 </div>
 
@@ -205,7 +174,7 @@
                         <i class="bookmark icon"></i> 最新推荐
                     </div>
                     <div class="ui segment" th:each="blog : ${recommendBlogs}">
-                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black m-text-thin"
+                        <a href="#" th:href="@{/blogs/{id}(id=${blog.id})}" target="_blank" class="m-black m-text-thin"
                            th:text="${blog.title}">用户故事（Userstory）</a>
                     </div>
                     <!--/*-->

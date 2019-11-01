@@ -54,7 +54,7 @@
                     <div class="ui middle aligned mobile reversed stackable grid">
                         <div class="eleven wide column">
                             <h3 class="ui header">
-                                <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"
+                                <a href="#" th:href="@{/blogs/{id}(id=${blog.id})}" target="_blank"
                                    th:text="${blog.title}">你真的理解什么是财富自由吗？</a>
                             </h3>
                             <p class="m-text" th:text="|${blog.description}......|">
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                         <div class="five wide column">
-                            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                            <a href="#" th:href="@{/blogs/{id}(id=${blog.id})}" target="_blank">
                                 <img class="ui rounded image" src="https://picsum.photos/id/1/800/450"
                                      th:src="@{${blog.firstPicture}}">
                             </a>
