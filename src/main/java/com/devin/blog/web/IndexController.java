@@ -48,4 +48,9 @@ public class IndexController {
         model.addAttribute("blog", blogService.getAndConvert(id));
         return "blog";
     }
+
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
 }

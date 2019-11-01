@@ -30,7 +30,7 @@ public class TypeServiceImpl implements TypeService {
     @Transactional
     @Override
     public Type getType(Long id) {
-        return typeRepository.findById(id).get();
+        return typeRepository.getOne(id);
     }
 
     @Transactional
